@@ -3,12 +3,16 @@
 
 Mini_Golf_Model_HomeDir = pwd;
 addpath(pwd);
-addpath([pwd '/Libraries']);
-addpath([pwd '/Libraries/Images']);
-addpath([pwd '/Libraries/Help']);
-addpath([pwd '/Scripts_Data']);
-addpath([pwd '/Images']);
-addpath([pwd '/Results']);
+addpath([pwd filesep 'Libraries']);
+addpath([pwd filesep 'Scripts_Data']);
+addpath([pwd filesep 'Images']);
+addpath([pwd filesep 'Results']);
+
+% Add local copy of Contact Force Library to the path
+addpath([Mini_Golf_Model_HomeDir filesep 'Libraries' filesep 'CFL_Libs']);
+cd([Mini_Golf_Model_HomeDir filesep 'Libraries' filesep 'CFL_Libs']);
+startup_Contact_Forces
+cd(Mini_Golf_Model_HomeDir)
 
 Mini_Golf_Model_PARAM
 %edit Mini_Golf_Model_PARAM
