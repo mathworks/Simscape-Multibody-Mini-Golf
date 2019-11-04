@@ -1,27 +1,28 @@
 % RUN COURSE AND SAVE RESULTS IN EXCEL FILE
-% Copyright 2012-2018 The MathWorks(TM), Inc.
+% Copyright 2012-2019 The MathWorks(TM), Inc.
 
 % RETURN TO HOME DIRECTORY SO THAT FIGURES ARE SAVED IN CORRECT FOLDER
 cd(Mini_Golf_Model_HomeDir);
+mdl = bdroot;
 
 % GET LIST OF HOLES
-HoleList = get_param([bdroot '/Course'],'MemberBlocks');
-HoleList = [',' HoleList ','];
-CommaInds = findstr(HoleList,',');
+HoleList = get_param([mdl '/Course'],'Variants');
+%HoleList = [',' HoleList ','];
+%CommaInds = findstr(HoleList,',');
 
-NumBlockChoices = length(CommaInds)-1;
+NumBlockChoices = length(HoleList);
 
-for hole_i = 1:NumBlockChoices
-     BlockChoiceSet{hole_i} = HoleList(CommaInds(hole_i)+1:CommaInds(hole_i+1)-1);
-end
+%for hole_i = 1:NumBlockChoices
+%     BlockChoiceSet{hole_i} = HoleList(CommaInds(hole_i)+1:CommaInds(hole_i+1)-1);
+%end
 
 % SET STARTING VALUE FOR HOLE RESULTS TO MAXIMUM STROKES AND TIME
 Mini_Golf_Results.Strokes(1:NumBlockChoices) = 10;
 Mini_Golf_Results.Time(1:NumBlockChoices) = 100;
 
 % RUN SIMULATION FOR EACH HOLE AND SAVE RESULTS
-for hole_i = 1:length(BlockChoiceSet)
-    set_param([bdroot '/Course'],'BlockChoice',char(BlockChoiceSet(hole_i)));
+for hole_i = 1:NumBlockChoices
+    set_param([bdroot '/Course'],'LabelModeActiveChoice',HoleList(hole_i).Name);
     
     sim(bdroot);
     
@@ -34,7 +35,7 @@ for hole_i = 1:length(BlockChoiceSet)
 	MGT.SimTime(hole_i) = Elapsed_Sim_Time;
 
     % SAVE FIGURE WINDOWS TO A FILE
-	saveas(gcf,['./Results/Ball_Path_' char(BlockChoiceSet(hole_i))],'fig');
+	saveas(gcf,['./Results/Ball_Path_' HoleList(hole_i).Name],'fig');
     close(gcf);
 end
 
@@ -42,15 +43,15 @@ end
 MG_out{1,1} = 'Hole';
 MG_out{1,2} = 'Strokes';
 MG_out{1,3} = 'Time';
-for hole_i = 1:length(BlockChoiceSet)
+for hole_i = 1:NumBlockChoices
     MG_out{hole_i+1,1} = hole_i;
     MG_out{hole_i+1,2} = sprintf('%i',Mini_Golf_Results.Strokes(hole_i));
     MG_out{hole_i+1,3} = sprintf('%3.2f',Mini_Golf_Results.Time(hole_i));
 end
 
-MG_out{length(BlockChoiceSet)+2,1} = 'Total';
-MG_out{length(BlockChoiceSet)+2,2} = sprintf('%i',sum(Mini_Golf_Results.Strokes));
-MG_out{length(BlockChoiceSet)+2,3} = sprintf('%3.2f',sum(Mini_Golf_Results.Time));
+MG_out{NumBlockChoices+2,1} = 'Total';
+MG_out{NumBlockChoices+2,2} = sprintf('%i',sum(Mini_Golf_Results.Strokes));
+MG_out{NumBlockChoices+2,3} = sprintf('%3.2f',sum(Mini_Golf_Results.Time));
 
 xlswrite('Mini_Golf_Results',MG_out,'Course_Results','A1');
 
