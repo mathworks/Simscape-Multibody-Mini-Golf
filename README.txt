@@ -1,5 +1,5 @@
 Simscape Multibody Mini Golf Library
-Copyright 2015-2016 The MathWorks, Inc.
+Copyright 2015-2017 The MathWorks, Inc.
 
 This library contains components for modeling a mini golf course.  It includes
 fixed walls, moving walls, posts, spinning obstacles, putting head, and the hole.
