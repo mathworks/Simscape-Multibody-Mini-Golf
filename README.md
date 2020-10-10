@@ -1,6 +1,8 @@
 # **Simscape Multibody Mini Golf Library**
 Copyright 2015-2020 The MathWorks(TM), Inc.
 
+[![View Simscape Multibody Mini Golf Library on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/36541-simscape-multibody-mini-golf-library)
+
 This library contains components for modeling a mini golf course.  It includes
 fixed walls, moving walls, posts, spinning obstacles, putting head, and the hole.
 A nine-hole course is provided, where the hole to be played can be selected
