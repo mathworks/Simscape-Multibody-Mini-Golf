@@ -3,7 +3,8 @@
 
 % RETURN TO HOME DIRECTORY SO THAT FIGURES ARE SAVED IN CORRECT FOLDER
 cd(Mini_Golf_Model_HomeDir);
-mdl = bdroot;
+mdl = 'Mini_Golf_Course';
+open_system(mdl)
 
 % GET LIST OF HOLES
 HoleList = get_param([mdl '/Course'],'Variants');
@@ -35,7 +36,7 @@ for hole_i = 1:NumBlockChoices
 	MGT.SimTime(hole_i) = Elapsed_Sim_Time;
 
     % SAVE FIGURE WINDOWS TO A FILE
-	saveas(gcf,['./Results/Ball_Path_' HoleList(hole_i).Name],'fig');
+	saveas(gcf,[pwd filesep 'Results' filesep 'Ball_Path_' HoleList(hole_i).Name],'fig');
     close(gcf);
 end
 
@@ -53,6 +54,10 @@ MG_out{NumBlockChoices+2,1} = 'Total';
 MG_out{NumBlockChoices+2,2} = sprintf('%i',sum(Mini_Golf_Results.Strokes));
 MG_out{NumBlockChoices+2,3} = sprintf('%3.2f',sum(Mini_Golf_Results.Time));
 
-xlswrite('Mini_Golf_Results',MG_out,'Course_Results','A1');
+T = cell2table(MG_out(2:end,:),...
+    "VariableNames",MG_out(1,:));
+
+writetable(T,[Mini_Golf_Model_HomeDir filesep 'Scripts_Data' filesep 'Mini_Golf_Results.xls'],'Sheet','Course_Results_new',...
+    "AutoFitWidth",false,'Range','A1');
 
 
