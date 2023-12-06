@@ -1,7 +1,7 @@
 # **Simscape Multibody Mini Golf Library**
 Copyright 2015-2023 The MathWorks(TM), Inc.
 
-![](Animations/Mini_Golf_Hole_6_Anim.png)
+![](Animations/Mini_Golf_Hole_6_Anim.gif)
 
 View on File Exchange: [![View Simscape Multibody Mini Golf Library on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/36541-simscape-multibody-mini-golf-library)  
 You can also open in MATLAB Online: [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/Simscape-Multibody-Mini-Golf&project=Mini_Golf_Library.prj)
